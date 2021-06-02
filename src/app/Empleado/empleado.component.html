@@ -1,0 +1,95 @@
+<h4>
+    Nuevo <small> Usuario </small></h4>
+<hr>
+<form autocomplete="off" [formGroup]="forma">
+
+    <div>
+
+        <div class="form-group row">
+            <label class="col-3 col-form-label">Nombre: </label>
+            <div class="col">
+
+                <input class="form-control col-8" type="text" placeholder="Nombre" formControlName="nombre" [class.is-invalid]="false">
+                <small *ngIf="" class="text-danger">
+          Ingrese 5 letras
+        </small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-3 col-form-label">Apellido: </label>
+            <div class="col">
+
+                <input class="form-control col-8" type="text" placeholder="Apellido" formControlName="apellido" [class.is-invalid]="false">
+                <small *ngIf="" class="text-danger">
+                Ingrese el apellido
+        </small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-3 col-form-label">Correo: </label>
+            <div class="col">
+
+                <input class="form-control col-8" type="text" placeholder="Correo" formControlName="correo" [class.is-invalid]="false">
+                <small *ngIf="" class="text-danger">
+          Ingrese un correo valido
+        </small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-3 col-form-label">Cedula: </label>
+            <div class="col">
+
+                <input class="form-control col-8" mask="000-000000-0000S" [dropSpecialCharacters]="false" type="text" placeholder="Cedula" formControlName="cedula" [class.is-invalid]="false">
+                <small *ngIf="" class="text-danger">
+          Este campo es obligatorio
+        </small>
+
+                <small *ngIf="" class="text-danger">
+            Esta cedula ya existe
+          </small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-3 col-form-label">Numero de asegurado: </label>
+            <div class="col">
+
+                <input class="form-control col-8" type="text" placeholder="Numero de asegurado" formControlName="inss" [class.is-invalid]="false">
+                <small *ngIf="" class="text-danger">
+          Este campo es obligatorio
+        </small>
+                <small *ngIf="" class="text-danger">
+            Este numero de asegurado ya existe
+          </small>
+            </div>
+        </div>
+
+
+    </div>
+
+    <span class="row" *ngIf='this.var == true'>
+        <div class="col text-left">
+            <button class="btn btn-primary" (click)="GuardarData()">
+            <i class="fa fa-save"></i>
+            Crear nuevo usuario 
+          </button>
+        </div>
+    </span>
+
+    <span class="row" *ngIf='this.var == false'>
+        <div class="col text-left">
+            <button class="btn btn-primary" (click)="ActualizarData()">
+            <i class="fa fa-save"></i>
+            Guardar Cambios
+          </button>
+        </div>
+    </span>
+
+    <span class="row">
+        <div class="col text-left">
+            <button class="btn btn-primary" (click)="validar()">
+            <i class="fa fa-save"></i>
+            Borrar Empleado
+          </button>
+        </div>
+    </span>
