@@ -16,6 +16,7 @@ interface ErrorValidate {
 export class EmpleadosServicesService {
 contador : number;
 var :Boolean;
+varcedula:any;
 
 
 dato : string;
@@ -109,11 +110,66 @@ existeCedula( control: FormControl ): Promise<ErrorValidate> | Observable<ErrorV
     setTimeout(() => {
       
       if (  EMPLEADOS.find( empleado => empleado.cedula === control.value )) {
-        resolve({ existe: true });
-        console.log('cedula existe')
+        resolve({ existe: true});
+      
+       
+      
+       
       } else {
         resolve( null );
-        console.log('cedula no existe')
+      console.log('no existe')
+     
+      
+      }
+
+    }, 1000);
+
+
+  });
+
+}
+
+existeCorreo( control: FormControl ): Promise<ErrorValidate> | Observable<ErrorValidate> {
+
+  if( !control.value ) {
+    return Promise.resolve(null);
+  }
+
+  return new Promise( (resolve, reject) => {
+
+    setTimeout(() => {
+      
+      if (  EMPLEADOS.find( empleado => empleado.correo === control.value )) {
+        resolve({ existe: true });
+       
+      } else {
+        resolve( null );
+      
+      }
+
+    }, 1000);
+
+
+  });
+
+}
+
+existeinss( control: FormControl ): Promise<ErrorValidate> | Observable<ErrorValidate> {
+
+  if( !control.value ) {
+    return Promise.resolve(null);
+  }
+
+  return new Promise( (resolve, reject) => {
+
+    setTimeout(() => {
+      
+      if (  EMPLEADOS.find( empleado => empleado.inss === control.value )) {
+        resolve({ existe: true });
+        
+      } else {
+        resolve( null );
+    
       }
 
     }, 1000);

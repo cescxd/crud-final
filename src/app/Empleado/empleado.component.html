@@ -9,9 +9,9 @@
             <label class="col-3 col-form-label">Nombre: </label>
             <div class="col">
 
-                <input class="form-control col-8" type="text" placeholder="Nombre" formControlName="nombre" [class.is-invalid]="false">
-                <small *ngIf="" class="text-danger">
-          Ingrese 5 letras
+                <input class="form-control col-8" type="text" placeholder="Nombre" formControlName="nombre" [class.is-invalid]="nombreNoValido">
+                <small *ngIf="nombreNoValido" class="text-danger">
+          Ingrese un nombre valido
         </small>
             </div>
         </div>
@@ -20,9 +20,9 @@
             <label class="col-3 col-form-label">Apellido: </label>
             <div class="col">
 
-                <input class="form-control col-8" type="text" placeholder="Apellido" formControlName="apellido" [class.is-invalid]="false">
-                <small *ngIf="" class="text-danger">
-                Ingrese el apellido
+                <input class="form-control col-8" type="text" placeholder="Apellido" formControlName="apellido" [class.is-invalid]="apellidoNoValido">
+                <small *ngIf="apellidoNoValido" class="text-danger">
+                Ingrese un apellido valido
         </small>
             </div>
         </div>
@@ -30,9 +30,9 @@
             <label class="col-3 col-form-label">Correo: </label>
             <div class="col">
 
-                <input class="form-control col-8" type="text" placeholder="Correo" formControlName="correo" [class.is-invalid]="false">
-                <small *ngIf="" class="text-danger">
-          Ingrese un correo valido
+                <input class="form-control col-8" type="text" placeholder="Correo" formControlName="correo" [class.is-invalid]="correoNoValido">
+                <small *ngIf="correoNoValido" class="text-danger">
+          Ingrese un correo valido o este correo ya fue tomado
         </small>
             </div>
         </div>
@@ -40,9 +40,9 @@
             <label class="col-3 col-form-label">Cedula: </label>
             <div class="col">
 
-                <input class="form-control col-8" mask="000-000000-0000S" [dropSpecialCharacters]="false" type="text" placeholder="Cedula" formControlName="cedula" [class.is-invalid]="false">
-                <small *ngIf="" class="text-danger">
-          Este campo es obligatorio
+                <input class="form-control col-8" mask="000-000000-0000S" [dropSpecialCharacters]="false" type="text" placeholder="Cedula" formControlName="cedula" [class.is-invalid]="cedulaNoValido">
+                <small *ngIf="cedulaNoValido" class="text-danger">
+          Numero de cedula invalido o cedula ya registrada
         </small>
 
                 <small *ngIf="" class="text-danger">
@@ -54,9 +54,9 @@
             <label class="col-3 col-form-label">Numero de asegurado: </label>
             <div class="col">
 
-                <input class="form-control col-8" type="text" placeholder="Numero de asegurado" formControlName="inss" [class.is-invalid]="false">
-                <small *ngIf="" class="text-danger">
-          Este campo es obligatorio
+                <input class="form-control col-8" type="text" placeholder="Numero de asegurado" formControlName="inss" [class.is-invalid]="inssNoValido">
+                <small *ngIf="inssNoValido" class="text-danger">
+          Numero de inss invalido o numero ya existe
         </small>
                 <small *ngIf="" class="text-danger">
             Este numero de asegurado ya existe
@@ -81,15 +81,6 @@
             <button class="btn btn-primary" (click)="ActualizarData()">
             <i class="fa fa-save"></i>
             Guardar Cambios
-          </button>
-        </div>
-    </span>
-
-    <span class="row">
-        <div class="col text-left">
-            <button class="btn btn-primary" (click)="validar()">
-            <i class="fa fa-save"></i>
-            Borrar Empleado
           </button>
         </div>
     </span>

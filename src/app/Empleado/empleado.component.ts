@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, NgForm, FormControl } from '@angular/forms';
 import {EmpleadosServicesService} from '../Services/empleados-services.service'
 import {EmpleadoModel} from '../Model/Modelo'
 import { Location } from '@angular/common';
@@ -47,15 +47,20 @@ export class EmpleadoComponent implements OnInit {
   }
 
   get correoNoValido() {
-    return this.forma.get('correo').invalid && this.forma.get('correo').touched
+    return this.forma.get('correo').invalid && this.forma.get('correo').touched && this.empleadosService.existeCorreo(this.forma.controls['correo'].value)
   }
 
   get cedulaNoValido() {
-    return this.forma.get('cedula').invalid && this.forma.get('cedula').touched
+    return this.forma.get('cedula').invalid && this.forma.get('cedula').touched && this.empleadosService.existeCedula(this.forma.controls['cedula'].value)
   }
 
+  //get cedulaExiste() {
+
+    //return  this.forma.get('cedula').statusChanges
+  //}
+
   get inssNoValido() {
-    return this.forma.get('cedula').invalid && this.forma.get('cedula').touched
+    return this.forma.get('inss').invalid && this.forma.get('inss').touched && this.empleadosService.existeinss(this.forma.controls['inss'].value)
   }
   
  
@@ -66,9 +71,9 @@ export class EmpleadoComponent implements OnInit {
       id  : ['',   ],
       nombre  : ['', [ Validators.required, Validators.minLength(5) ]  ],
       apellido  : ['', [ Validators.required, Validators.minLength(5) ]  ],
-      correo  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
+      correo  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')],this.empleadosService.existeCorreo ],
       cedula : ['', , this.empleadosService.existeCedula ],
-      inss   : ['', Validators.required ],
+      inss   : ['', Validators.required, this.empleadosService.existeinss ],
     })
 
   }  
@@ -103,11 +108,30 @@ this.empleadosService.updateEmpleado(id,this.forma.value)
     }
 
     GuardarData(){
-       this.indice = this.empleadosService.getContador();
-      this.forma.controls['id'].setValue(this.indice.toString());
-      this.empleadosService.crearEmpleado(this.forma.value);
-      //this.location.back();
-      console.log(this.forma.controls['cedula'].value);
+      if ( this.forma.invalid ) {
+
+        return Object.values( this.forma.controls ).forEach( control => {
+          
+          if ( control instanceof FormGroup ) {
+            Object.values( control.controls ).forEach( control => control.markAsTouched() );
+         
+          } else {
+            control.markAsTouched();
+            
+          }
+           });
+          
+      
+      } else {
+        this.indice = this.empleadosService.getContador();
+        this.forma.controls['id'].setValue(this.indice.toString());
+        this.empleadosService.crearEmpleado(this.forma.value);
+        this.location.back();
+
+      }
+
+     
+     
 
     }
 
@@ -121,13 +145,9 @@ this.empleadosService.updateEmpleado(id,this.forma.value)
     validar(){
       console.log(this.forma.controls['cedula'].value);
       const c=   this.empleadosService.validarCedula(this.forma.controls['cedula'].value);
-     
-
-
-    console.log(c);
+      console.log(c);
+   //   console.log(this.empleadosService.varcedula)
  }
     
-  
-
 
 }
